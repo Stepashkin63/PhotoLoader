@@ -1,4 +1,4 @@
-package ru.stepashkin.picsumloader
+package ru.stepashkin.picsumloader.fragments
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

@@ -1,15 +1,12 @@
 package ru.stepashkin.picsumloader
 
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import ru.stepashkin.picsumloader.databinding.ActivityMainBinding
+import ru.stepashkin.picsumloader.fragments.PictureAdapter
 import ru.stepashkin.picsumloader.retrofit.MainRepository
 import ru.stepashkin.picsumloader.retrofit.PicSumApi
 
@@ -20,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private val pictureAdapter = PictureAdapter()
 
     private lateinit var viewModel: MainActivityViewModel
+
+    var tabTitle = arrayOf("Photos", "Favourite")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +33,16 @@ class MainActivity : AppCompatActivity() {
             ViewModelFactory(mainRepository))[MainActivityViewModel::class.java]
 
         setData()
+
+        bind.viewPager2.adapter = ViewPageAdapter(supportFragmentManager, lifecycle)
+
+        TabLayoutMediator(bind.tabLayout, bind.viewPager2) { tab, position ->
+            tab.text = tabTitle[position]
+        }.attach()
     }
 
     private fun setData() {
-        bind.placeHolder.adapter = pictureAdapter
+        bind.viewPager2.adapter = pictureAdapter
 
         viewModel.photoData.observe(this) {
             pictureAdapter.setPhotos(it)
