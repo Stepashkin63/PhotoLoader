@@ -7,7 +7,7 @@ import kotlinx.coroutines.*
 import ru.stepashkin.picsumloader.model.ModelPhotosItem
 import ru.stepashkin.picsumloader.retrofit.MainRepository
 
-class FragmentsViewModel (private val mainRepository: MainRepository): ViewModel() {
+class FragmentsViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     private val coroutineContext = SupervisorJob() + Dispatchers.Main.immediate
     private val coroutineScope: CoroutineScope = CoroutineScope(coroutineContext)
@@ -32,7 +32,6 @@ class FragmentsViewModel (private val mainRepository: MainRepository): ViewModel
     init {
         getPhotoData()
     }
-
 
     private fun getPhotoData() {
         coroutineScope.launch {

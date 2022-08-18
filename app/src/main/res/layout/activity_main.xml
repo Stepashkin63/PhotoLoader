@@ -26,8 +26,6 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-
-
     <ProgressBar
         android:id="@+id/progressDialog"
         android:layout_width="50dp"

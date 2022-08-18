@@ -1,14 +1,15 @@
 package ru.stepashkin.picsumloader.fragments
 
-import android.graphics.ColorSpace
+import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo.newInstance
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import ru.stepashkin.picsumloader.R
 import ru.stepashkin.picsumloader.databinding.FragmentPhotosBinding
-import ru.stepashkin.picsumloader.model.ModelPhotosItem
 
 class PhotosFragment : Fragment() {
 
@@ -17,7 +18,7 @@ class PhotosFragment : Fragment() {
 
     private var pictureAdapter = PictureAdapter()
 
-    private val fragmentsViewModel : FragmentsViewModel by activityViewModels()
+    private val fragmentsViewModel: FragmentsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
@@ -34,7 +35,11 @@ class PhotosFragment : Fragment() {
         fragmentsViewModel.photoData.observe(viewLifecycleOwner) {
             pictureAdapter.setPhotos(it)
         }
-
+        //нажатие на изображение
+        bind.recyclerView1.setOnClickListener{
+            (activity as AppCompatActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.recyclerView2, FavouriteFragment.).commit()
+        }
     }
 
     override fun onDestroyView() {

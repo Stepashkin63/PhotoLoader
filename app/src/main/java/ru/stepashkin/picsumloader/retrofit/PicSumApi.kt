@@ -10,6 +10,7 @@ import ru.stepashkin.picsumloader.const.END_POINT_GET
 
 interface PicSumApi {
 
+    //Делаем запрос
     @GET(END_POINT_GET)
     suspend fun getPhotos(): Response<List<ModelPhotosItem>>
 

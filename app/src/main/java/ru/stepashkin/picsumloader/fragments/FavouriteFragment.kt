@@ -5,23 +5,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import ru.stepashkin.picsumloader.R
+import ru.stepashkin.picsumloader.databinding.FragmentFavouriteBinding
 import ru.stepashkin.picsumloader.databinding.FragmentPhotosBinding
 
 class FavouriteFragment : Fragment() {
 
-    private var _bind: FragmentPhotosBinding? = null
+    private var _bind: FragmentFavouriteBinding? = null
     private val bind get() = _bind!!
 
-    private val fragmentViewModel: FragmentsViewModel by activityViewModels()
+    private var pictureAdapter = PictureAdapter()
+
+    private val fragmentsViewModel: FragmentsViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourite, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+    ): View {
+        _bind = FragmentFavouriteBinding.inflate(inflater, container, false)
+        return bind.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fragmentsViewModel.favouriteData.observe(viewLifecycleOwner) {
+            //?
+            bind.recyclerView2.
+        }
     }
 
     override fun onDestroyView() {
