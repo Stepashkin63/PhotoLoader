@@ -3,10 +3,11 @@ package ru.stepashkin.picsumloader
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.stepashkin.picsumloader.databinding.ActivityMainBinding
-import ru.stepashkin.picsumloader.fragments.PictureAdapter
+import ru.stepashkin.picsumloader.fragments.FragmentsViewModel
 import ru.stepashkin.picsumloader.retrofit.MainRepository
 import ru.stepashkin.picsumloader.retrofit.PicSumApi
 
@@ -14,9 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bind: ActivityMainBinding
 
-    private val pictureAdapter = PictureAdapter()
-
     private lateinit var viewModel: MainActivityViewModel
+
+    private val fragmentsViewModel: FragmentsViewModel by viewModels()
 
     var tabTitle = arrayOf("Photos", "Favourite")
 
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
-        val retrofitService = PicSumApi.getRetrofit()
-        val mainRepository = MainRepository(retrofitService)
+        val picSumApi = PicSumApi.getRetrofit()
+        val mainRepository = MainRepository(picSumApi)
 
         viewModel = ViewModelProvider(this,
             ViewModelFactory(mainRepository))[MainActivityViewModel::class.java]
@@ -42,10 +43,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        bind.viewPager2.adapter = pictureAdapter
+        //bind.viewPager2.adapter = pictureAdapter
 
-        viewModel.photoData.observe(this) {
-            pictureAdapter.setPhotos(it)
+        fragmentsViewModel.photoData.observe(this) {
+            fragmentsViewModel.setDataPhoto(it)
         }
 
         viewModel.loading.observe(this) {

@@ -14,8 +14,6 @@ class FavouriteFragment : Fragment() {
     private var _bind: FragmentPhotosBinding? = null
     private val bind get() = _bind!!
 
-    private var adapter = PictureAdapter()
-
     private val fragmentViewModel: FragmentsViewModel by activityViewModels()
 
     override fun onCreateView(
