@@ -7,5 +7,4 @@ data class ModelPhotosItem(
     val id: String,
     val url: String,
     val width: Int,
-    val list: List<ModelPhotosItem>
 ) 

@@ -32,7 +32,7 @@ class PhotosFragment : Fragment() {
         bind.recyclerView1.adapter = pictureAdapter
 
         fragmentsViewModel.photoData.observe(viewLifecycleOwner) {
-            pictureAdapter.setPhotos(it.list)
+            pictureAdapter.setPhotos(it)
         }
 
     }

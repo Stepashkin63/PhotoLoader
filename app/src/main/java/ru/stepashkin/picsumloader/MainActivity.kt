@@ -15,9 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bind: ActivityMainBinding
 
-    private lateinit var viewModel: MainActivityViewModel
-
-    private val fragmentsViewModel: FragmentsViewModel by viewModels()
+    private lateinit var viewModel: FragmentsViewModel
 
     var tabTitle = arrayOf("Photos", "Favourite")
 
@@ -31,11 +29,9 @@ class MainActivity : AppCompatActivity() {
         val mainRepository = MainRepository(picSumApi)
 
         viewModel = ViewModelProvider(this,
-            ViewModelFactory(mainRepository))[MainActivityViewModel::class.java]
+            ViewModelFactory(mainRepository))[FragmentsViewModel::class.java]
 
         setData()
-
-        bind.viewPager2.adapter = ViewPageAdapter(supportFragmentManager, lifecycle)
 
         TabLayoutMediator(bind.tabLayout, bind.viewPager2) { tab, position ->
             tab.text = tabTitle[position]
@@ -43,11 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        //bind.viewPager2.adapter = pictureAdapter
-
-        fragmentsViewModel.photoData.observe(this) {
-            fragmentsViewModel.setDataPhoto(it)
-        }
+        bind.viewPager2.adapter = ViewPageAdapter(supportFragmentManager,lifecycle)
 
         viewModel.loading.observe(this) {
             if (it) {
