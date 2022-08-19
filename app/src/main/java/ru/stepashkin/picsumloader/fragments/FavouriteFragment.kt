@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import ru.stepashkin.picsumloader.R
 import ru.stepashkin.picsumloader.databinding.FragmentFavouriteBinding
-import ru.stepashkin.picsumloader.databinding.FragmentPhotosBinding
 
 class FavouriteFragment : Fragment() {
 
@@ -31,8 +31,7 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fragmentsViewModel.favouriteData.observe(viewLifecycleOwner) {
-            //?
-            bind.recyclerView2.
+
         }
     }
 

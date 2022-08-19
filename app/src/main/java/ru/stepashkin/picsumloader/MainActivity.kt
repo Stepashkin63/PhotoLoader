@@ -7,10 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.stepashkin.picsumloader.databinding.ActivityMainBinding
 import ru.stepashkin.picsumloader.fragments.FragmentsViewModel
-import ru.stepashkin.picsumloader.fragments.PhotosFragment
 import ru.stepashkin.picsumloader.retrofit.MainRepository
 import ru.stepashkin.picsumloader.retrofit.PicSumApi
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,10 +34,6 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(bind.tabLayout, bind.viewPager2) { tab, position ->
             tab.text = tabTitle[position]
         }.attach()
-
-        //открытие фрагмента
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.recyclerView2, PhotosFragment.).commit()
     }
 
     private fun setData() {
